@@ -2,9 +2,6 @@
 # change device labels
 into_all all label \_SB.PCI0.LPCB.H_EC set_label begin \_SB.PCI0.LPCB.EC end;
 into_all all code_regex H_EC replaceall_matched begin EC end;
-into_all all label \_SB.PCI0.LPCB.EC.CMB0 set_label begin \_SB.PCI0.LPCB.EC.BAT1 end;
-into_all all code_regex CMB0 replaceall_matched begin BAT1 end;
-into_all all label CMB0 set_label begin BAT1 end;
 into_all all code_regex GFX0 replaceall_matched begin IGPU end;
 # break up 16-bit registers
 into scope label \_SB.PCI0.LPCB.EC code_regex CBT,\s+16 replace_matched begin CBT0,8,CBT1,8 end;
