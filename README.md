@@ -14,3 +14,5 @@ macOS Catalina Beta 2
 ## Things you might want to test
   1. NVRAM and PS2/EC debugging to save keyboard backlight level
   2. Replacement of WiFi & BT Module
+## Credits
+Apple, mostly RehabMan, and other Hackintosh contributors
