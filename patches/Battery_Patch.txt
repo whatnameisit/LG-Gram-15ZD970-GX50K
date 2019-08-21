@@ -1,4 +1,4 @@
-# For LG Gram 15ZD970-GX5YL. Patch should be applied to XnSsdt, not DSDT
+# For LG Gram 15ZD970-GX50K. Patch should be applied to XnSsdt, not DSDT
 # change device labels: Install WhateverGreen
 # into_all all label \_SB.PCI0.LPCB.H_EC set_label begin \_SB.PCI0.LPCB.EC end;
 # into_all all code_regex H_EC replaceall_matched begin EC end;
