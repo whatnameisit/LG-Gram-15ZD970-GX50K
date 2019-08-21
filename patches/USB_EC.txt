@@ -1,0 +1,9 @@
+# For LG Gram 15ZD970-GX5YL. Patch can be applied to XnSsdt or DSDT, but not both
+# credit: Acidanthera for the device path and _HID, whatnameisit for writing it into the static patch
+# add fake EC device for USB power properties
+into definitionblock code_regex . insert
+begin
+Device (\_SB.PCI0.LPCB.EC)\n
+{Name (_HID,"ACID0001")
+}
+end;
