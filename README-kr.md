@@ -10,5 +10,8 @@ macOS Catalina Beta 2
   1. 키보드 백라이트 설정
   2. 와이파이 블루투스 모듈 macOS에서 호환되는 것으로 교체
   3. SD 카드 리더 작동
+## Changelog
+September 13, 2019
+- 17Z990-VA5BK 모델 배터리 핫패치 추가. 다른 모든 부분은 별도 패치 필요
 ## Credits
 Apple, mostly RehabMan, and other Hackintosh contributors

@@ -1,0 +1,76 @@
+# For LG Gram 17Z990-VA5BK. Patch should be applied to DSDT
+# break up 16-bit registers
+into device label H_EC code_regex BDC,\s+16 replace_matched begin BDC0,8,BDC1,8 end;
+into device label H_EC code_regex BFC,\s+16 replace_matched begin BFC0,8,BFC1,8 end;
+into device label H_EC code_regex BDV,\s+16 replace_matched begin BDV0,8,BDV1,8 end;
+into device label H_EC code_regex BSN,\s+16 replace_matched begin BSN0,8,BSN1,8 end;
+into device label H_EC code_regex BPR,\s+16 replace_matched begin BPR0,8,BPR1,8 end;
+into device label H_EC code_regex BRC,\s+16 replace_matched begin BRC0,8,BRC1,8 end;
+into device label H_EC code_regex BPV,\s+16 replace_matched begin BPV0,8,BPV1,8 end;
+into device label H_EC code_regex ALS,\s+16 replace_matched begin ALS0,8,ALS1,8 end;
+into device label H_EC code_regex CYC1,\s+16 replace_matched begin YCC0,8,YCC1,8 end;
+# insert B1B2 method
+into method label B1B2 remove_entry;
+into definitionblock code_regex . insert
+begin
+Method (B1B2, 2, NotSerialized) { Return(Or(Arg0, ShiftLeft(Arg1, 8))) }\n
+end;
+# fix 16-bit registers
+into method label GLUX code_regex \\_SB.PCI0.LPCB.H_EC.ECRD\s+\(RefOf\s+\(\\_SB.PCI0.LPCB.H_EC.ALS\)\) replaceall_matched begin B1B2(\\_SB.PCI0.LPCB.H_EC.ALS0,\\_SB.PCI0.LPCB.H_EC.ALS1) end;
+into method label XBIF code_regex \(BFC, replaceall_matched begin \(B1B2(BFC0,BFC1), end;
+into method label XBIF code_regex \(BDC, replaceall_matched begin \(B1B2(BDC0,BDC1), end;
+into method label XBIF code_regex \(BDV, replaceall_matched begin \(B1B2(BDV0,BDV1), end;
+into method label XBIF code_regex \(BSN, replaceall_matched begin \(B1B2(BSN0,BSN1), end;
+into method label XBIX code_regex \(CYC1, replaceall_matched begin \(B1B2(YCC0,YCC1), end;
+into method label XBST code_regex \(BPR, replaceall_matched begin \(B1B2(BPR0,BPR1), end;
+into method label XBST code_regex \(BPV, replaceall_matched begin \(B1B2(BPV0,BPV1), end;
+into method label XBST code_regex \(BRC, replaceall_matched begin \(B1B2(BRC0,BRC1), end;
+into method label XBST code_regex \(BFC, replaceall_matched begin \(B1B2(BFC0,BFC1), end;
+# break up 24-bit register
+into device label H_EC code_regex VER,\s+24 replace_matched begin VER0,8,VER1,8,VER2,8 end;
+# insert B1B3 method
+into method label B1B3 remove_entry;
+into definitionblock code_regex . insert
+begin
+Method (B1B3, 3, NotSerialized)\n
+{\n
+    Store(Arg2, Local0)\n
+    Or(Arg1, ShiftLeft(Local0, 8), Local0)\n
+    Or(Arg0, ShiftLeft(Local0, 8), Local0)\n
+    Return(Local0)\n
+}\n
+end;
+# fix 24-bit register
+into method label N01O code_regex \\_SB.PCI0.LPCB.H_EC.ECRD\s+\(RefOf\s+\(\\_SB.PCI0.LPCB.H_EC.VER\)\) replaceall_matched begin B1B3(\\_SB.PCI0.LPCB.H_EC.VER0,\\_SB.PCI0.LPCB.H_EC.VER1,\\_SB.PCI0.LPCB.H_EC.VER2) end;
+# change 72-bit buffer
+into device label H_EC code_regex BMFG,\s+72 replace_matched begin BMFZ,72 end;
+# utility methods to read buffers from EC
+into method label RE1B parent_label \_SB.PCI0.LPCB.H_EC remove_entry;
+into method label RECB parent_label \_SB.PCI0.LPCB.H_EC remove_entry;
+into device label H_EC insert
+begin
+Method (RE1B, 1, NotSerialized)\n
+{\n
+    OperationRegion(ERAM, EmbeddedControl, Arg0, 1)\n
+    Field(ERAM, ByteAcc, NoLock, Preserve) { BYTE, 8 }\n
+    Return(BYTE)\n
+}\n
+Method (RECB, 2, Serialized)\n
+// Arg0 - offset in bytes from zero-based EC\n
+// Arg1 - size of buffer in bits\n
+{\n
+    ShiftRight(Add(Arg1,7), 3, Arg1)\n
+    Name(TEMP, Buffer(Arg1) { })\n
+    Add(Arg0, Arg1, Arg1)\n
+    Store(0, Local0)\n
+    While (LLess(Arg0, Arg1))\n
+    {\n
+        Store(RE1B(Arg0), Index(TEMP, Local0))\n
+        Increment(Arg0)\n
+        Increment(Local0)\n
+    }\n
+    Return(TEMP)\n
+}\n
+end;
+# fix 72-bit buffer
+into method label XBIF code_regex \(BMFG, replaceall_matched begin (RECB(0x9E,72), end;

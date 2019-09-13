@@ -15,5 +15,8 @@ macOS Catalina Beta 2
   1. NVRAM and PS2/EC debugging to save keyboard backlight level
   2. Replacement of WiFi & BT Module
   3. SD Card Reader
+## Changelog
+September 13, 2019
+- Added battery hotpatch for 17Z990-VA5BK. Other things still need to be patched
 ## Credits
 Apple, mostly RehabMan, and other Hackintosh contributors

@@ -1,5 +1,5 @@
 # For LG Gram 15ZD970-GX50K. Patch should be applied to XnSsdt, not DSDT
-# change device labels: Install WhateverGreen
+# change device labels: Install WhateverGreen and add a fake EC device
 # into_all all label \_SB.PCI0.LPCB.H_EC set_label begin \_SB.PCI0.LPCB.EC end;
 # into_all all code_regex H_EC replaceall_matched begin EC end;
 # into_all all code_regex GFX0 replaceall_matched begin IGPU end;
@@ -36,7 +36,7 @@ into method label XBST code_regex \(BFC, replaceall_matched begin \(B1B2(BFC0,BF
 # break up 24-bit register
 into scope label \_SB.PCI0.LPCB.H_EC code_regex VER,\s+24 replace_matched begin VER0,8,VER1,8,VER2,8 end;
 # insert B1B3 method
-into method label B1B4 remove_entry;
+into method label B1B3 remove_entry;
 into definitionblock code_regex . insert
 begin
 Method (B1B3, 3, NotSerialized)\n
