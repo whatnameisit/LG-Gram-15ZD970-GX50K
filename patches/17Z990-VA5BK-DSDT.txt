@@ -1,4 +1,4 @@
-# For LG Gram 17Z990-VA5BK. Patch should be applied to DSDT
+# Patch 1 for LG Gram 17Z990-VA5BK. Patch should be applied to DSDT.
 # break up 16-bit registers
 into device label H_EC code_regex BDC,\s+16 replace_matched begin BDC0,8,BDC1,8 end;
 into device label H_EC code_regex BFC,\s+16 replace_matched begin BFC0,8,BFC1,8 end;
@@ -9,6 +9,7 @@ into device label H_EC code_regex BRC,\s+16 replace_matched begin BRC0,8,BRC1,8 
 into device label H_EC code_regex BPV,\s+16 replace_matched begin BPV0,8,BPV1,8 end;
 into device label H_EC code_regex ALS,\s+16 replace_matched begin ALS0,8,ALS1,8 end;
 into device label H_EC code_regex CYC1,\s+16 replace_matched begin YCC0,8,YCC1,8 end;
+into device label H_EC code_regex CBT,\s+16 replace_matched begin CBT0,8,CBT1,8 end;
 # insert B1B2 method
 into method label B1B2 remove_entry;
 into definitionblock code_regex . insert

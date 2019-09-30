@@ -99,6 +99,16 @@
 					<key>Replace</key>
 					<data>WDAxTwA=</data>
 				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>BAT: M(WMBB) to XMBB in SSDT-2</string>
+					<key>Disabled</key>
+					<false/>
+					<key>Find</key>
+					<data>V01CQgs=</data>
+					<key>Replace</key>
+					<data>WE1CQgs=</data>
+				</dict>
 			</array>
 		</dict>
 		<key>DisabledAML</key>

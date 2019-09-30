@@ -1,0 +1,10 @@
+# Patch 2 for LG Gram 17Z990-VA5BK. Patch should be applied to SSDT-2-FwiTable
+# insert external declarations
+into definitionblock code_regex . insert
+begin
+External (_SB.PCI0.LPCB.H_EC.CBT0,FieldUnitObj)\n
+External (_SB.PCI0.LPCB.H_EC.CBT1,FieldUnitObj)\n
+External (B1B2,MethodObj)\n
+end;
+# fix 16-bit register
+into method label WMBB code_regex \\_SB.PCI0.LPCB.H_EC.CBT\) replaceall_matched begin B1B2(\\_SB.PCI0.LPCB.H_EC.CBT0,\\_SB.PCI0.LPCB.H_EC.CBT1)) end;

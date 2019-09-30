@@ -16,6 +16,9 @@ macOS Catalina Beta 2
   2. Replacement of WiFi & BT Module
   3. SD Card Reader
 ## Changelog
+September 30, 2019
+- Fixed battery hotpatch for 17Z990-VA5BK.
+
 September 13, 2019
 - Added battery hotpatch for 17Z990-VA5BK. Other things still need to be patched
 ## Credits
