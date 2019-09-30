@@ -8,6 +8,8 @@
 		<true/>
 		<key>Comment-DisabledAML</key>
 		<string>Disable other forms of CPU PM due to SSDT/Generate/PluginType=true</string>
+		<key>Comment-DisabledAML - 2</key>
+		<string>Disable SSDT-MEM2 because it is not found in MBP15x</string>
 		<key>DSDT</key>
 		<dict>
 			<key>DropOEM_DSM</key>
@@ -16,10 +18,6 @@
 			<dict>
 				<key>Comment-IRQ Fix</key>
 				<string>The following fixes may be needed for onboard audio/USB/etc</string>
-				<key>FixHPET</key>
-				<true/>
-				<key>FixIPIC</key>
-				<true/>
 				<key>FixMutex</key>
 				<true/>
 				<key>FixRTC</key>
@@ -116,6 +114,7 @@
 			<string>SSDT.aml</string>
 			<string>SSDT-XCPM.aml</string>
 			<string>SSDT-PluginType1.aml</string>
+			<string>SSDT-MEM2.aml</string>
 		</array>
 		<key>DropTables</key>
 		<array>

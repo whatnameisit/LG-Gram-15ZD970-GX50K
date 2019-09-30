@@ -16,10 +16,6 @@
 			<dict>
 				<key>Comment-IRQ Fix</key>
 				<string>The following fixes may be needed for onboard audio/USB/etc</string>
-				<key>FixHPET</key>
-				<true/>
-				<key>FixIPIC</key>
-				<true/>
 				<key>FixMutex</key>
 				<true/>
 				<key>FixRTC</key>
@@ -38,6 +34,14 @@
 					<data>R1BSVwJwaA==</data>
 					<key>Replace</key>
 					<data>WFBSVwJwaA==</data>
+				</dict>
+				<dict>
+					<key>Comment</key>
+					<string>Resource tables for MBP14,1: Rename _STA methods in MATH and LDR2 device to XSTA, pair with SSDT-MATHLDR2_STA.aml</string>
+					<key>Find</key>
+					<data>X1NUQQCgDZNQ</data>
+					<key>Replace</key>
+					<data>WFNUQQCgDZNQ</data>
 				</dict>
 				<dict>
 					<key>Comment</key>
